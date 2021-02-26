@@ -306,8 +306,7 @@ T1_plot
 Calculate the mean and standard deviations of tSDs for each predicted state from the pond-only 3-state HMM (values in Table S3 of manuscript).
 
 
-
-```{r, echo=FALSE}
+```{r, message=FALSE, warning=FALSE}
 Wet_indeces_pond_T1 <- which(HMM_post_T1$state %in% c(2))
 T1_Wet_days <- c()
 T1_Wet_sds <- c()
@@ -435,7 +434,7 @@ T1_differences_plot
 Calculate the mean and standard deviations of tSDs for each predicted state from the paired pond-control 3-state HMM (values in Table S3 of manuscript).
 
 
-```{r, echo=FALSE}
+```{r, message=FALSE, warning=FALSE}
 Wet_indeces_pond_T1_delta <- which(HMM_post_T1_difference$state %in% c(1))
 T1_Wet_days_delta <- c()
 T1_Wet_sds_differences_delta <- c()
