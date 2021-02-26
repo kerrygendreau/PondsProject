@@ -403,8 +403,8 @@ T1_pond_summary$control_sd <- c(sd(T1_Wet_sds_control), sd(T1_Wet2_sds_control),
 
 gt_T1_tbl <- gt(data=T1_pond_summary) %>%
   tab_header(
-    title = "3-State HMM Summary",
-    subtitle="Pond-Only T1"
+    title = md("3-State HMM Summary"),
+    subtitle=md("Pond-Only T1")
   )
     
 
@@ -949,8 +949,8 @@ T1_pond_differences_summary$sd <- c(sd(T1_Wet_sds_differences_delta), sd(T1_Wet2
 
 gt_T1_differneces_tbl <- gt(data=T1_pond_differences_summary) %>%
   tab_header(
-    title = "3-State HMM Summary",
-    subtitle="Paired Pond-Control T1"
+    title = md("3-State HMM Summary"),
+    subtitle= md("Paired Pond-Control T1")
   )
     
 
