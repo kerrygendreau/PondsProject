@@ -359,58 +359,6 @@ T1_plot
 
 Calculate the mean and standard deviations of tSDs for each predicted state from the pond-only 3-state HMM (values in Table S3 of manuscript).
 
-``` r
-Wet_indeces_pond_T1 <- which(HMM_post_T1$state %in% c(2))
-T1_Wet_days <- c()
-T1_Wet_sds <- c()
-T1_Wet_sds_control <- c()
-for(i in Wet_indeces_pond_T1) {
-  T1_Wet_days <- append(T1_Wet_days, T1_dataset$Date[i])
-  T1_Wet_sds <- append(T1_Wet_sds, T1_dataset$T1_pond[i])
-  T1_Wet_sds_control <- append(T1_Wet_sds_control, T1_dataset$T1_control[i])
-}
-T1_Wet_days <- as.Date(T1_Wet_days, format="%Y-%m-%d")
-
-Wet2_indeces_pond_T1 <- which(HMM_post_T1$state %in% c(3))
-T1_Wet2_days <- c()
-T1_Wet2_sds <- c()
-T1_Wet2_sds_control <- c()
-for(i in Wet2_indeces_pond_T1) {
-  T1_Wet2_days <- append(T1_Wet2_days, T1_dataset$Date[i])
-  T1_Wet2_sds <- append(T1_Wet2_sds, T1_dataset$T1_pond[i])
-  T1_Wet2_sds_control <- append(T1_Wet2_sds_control, T1_dataset$T1_control[i])
-}
-T1_Wet2_days <- as.Date(T1_Wet2_days, format="%Y-%m-%d")
-
-
-Dry_indeces_pond_T1 <- which(HMM_post_T1$state %in% c(1))
-T1_Dry_days <- c()
-T1_Dry_sds <- c()
-T1_Dry_sds_control <- c()
-for(i in Dry_indeces_pond_T1) {
-  T1_Dry_days <- append(T1_Dry_days, T1_dataset$Date[i])
-  T1_Dry_sds <- append(T1_Dry_sds, T1_dataset$T1_pond[i])
-  T1_Dry_sds_control <- append(T1_Dry_sds_control, T1_dataset$T1_control[i])
-}
-T1_Dry_days <- as.Date(T1_Dry_days, format="%Y-%m-%d")
-
-
-T1_pond_summary <- data.frame("state"=c("Wet", "Wet2","Dry"))
-T1_pond_summary$pond_mean <- c(mean(T1_Wet_sds), mean(T1_Wet2_sds), mean(T1_Dry_sds))
-T1_pond_summary$pond_sd <- c(sd(T1_Wet_sds), sd(T1_Wet2_sds), sd(T1_Dry_sds))
-T1_pond_summary$control_mean <- c(mean(T1_Wet_sds_control), mean(T1_Wet2_sds_control), mean(T1_Dry_sds_control))
-T1_pond_summary$control_sd <- c(sd(T1_Wet_sds_control), sd(T1_Wet2_sds_control), sd(T1_Dry_sds_control))
-
-gt_T1_tbl <- gt(data=T1_pond_summary) %>%
-  tab_header(
-    title = "3-State HMM Summary",
-    subtitle="Pond-Only T1"
-  )
-    
-
-gt_T1_tbl
-```
-
 <!--html_preserve-->
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
@@ -912,50 +860,6 @@ T1_differences_plot
 ![](Gendreau_WRR_2021_Pond_HMM_R_Code_files/figure-markdown_github/unnamed-chunk-13-1.png)
 
 Calculate the mean and standard deviations of tSDs for each predicted state from the paired pond-control 3-state HMM (values in Table S3 of manuscript).
-
-``` r
-Wet_indeces_pond_T1_delta <- which(HMM_post_T1_difference$state %in% c(1))
-T1_Wet_days_delta <- c()
-T1_Wet_sds_differences_delta <- c()
-for(i in Wet_indeces_pond_T1_delta) {
-  T1_Wet_days_delta <- append(T1_Wet_days_delta, T1_difference_df$Date[i])
-  T1_Wet_sds_differences_delta <- append(T1_Wet_sds_differences_delta, T1_dataset$T1_sd_differences[i])
-}
-T1_Wet_days_delta <- as.Date(T1_Wet_days_delta, format="%Y-%m-%d")
-
-
-Wet2_indeces_pond_T1_delta <- which(HMM_post_T1_difference$state %in% c(2))
-T1_Wet2_days_delta <- c()
-T1_Wet2_sds_differences_delta <- c()
-for(i in Wet2_indeces_pond_T1_delta) {
-  T1_Wet2_days_delta <- append(T1_Wet2_days_delta, T1_difference_df$Date[i])
-  T1_Wet2_sds_differences_delta <- append(T1_Wet2_sds_differences_delta, T1_dataset$T1_sd_differences[i])
-}
-T1_Wet2_days_delta <- as.Date(T1_Wet2_days_delta, format="%Y-%m-%d")
-
-Dry_indeces_pond_T1_delta <- which(HMM_post_T1_difference$state %in% c(3))
-T1_Dry_days_delta <- c()
-T1_Dry_sds_differences_delta <- c()
-for(i in Dry_indeces_pond_T1_delta) {
-  T1_Dry_days_delta <- append(T1_Dry_days_delta, T1_difference_df$Date[i])
-  T1_Dry_sds_differences_delta <- append(T1_Dry_sds_differences_delta, T1_dataset$T1_sd_differences[i])
-}
-T1_Dry_days_delta <- as.Date(T1_Dry_days_delta, format="%Y-%m-%d")
-
-
-T1_pond_differences_summary <- data.frame("state"=c("Wet", "Wet2","Dry"))
-T1_pond_differences_summary$mean <- c(mean(T1_Wet_sds_differences_delta), mean(T1_Wet2_sds_differences_delta), mean(T1_Dry_sds_differences_delta))
-T1_pond_differences_summary$sd <- c(sd(T1_Wet_sds_differences_delta), sd(T1_Wet2_sds_differences_delta), sd(T1_Dry_sds_differences_delta))
-
-gt_T1_differneces_tbl <- gt(data=T1_pond_differences_summary) %>%
-  tab_header(
-    title = "3-State HMM Summary",
-    subtitle="Paired Pond-Control T1"
-  )
-    
-
-gt_T1_differneces_tbl
-```
 
 <!--html_preserve-->
 <style>html {
