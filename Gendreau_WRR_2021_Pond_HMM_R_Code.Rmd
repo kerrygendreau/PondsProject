@@ -306,7 +306,7 @@ T1_plot
 Calculate the mean and standard deviations of tSDs for each predicted state from the pond-only 3-state HMM (values in Table S3 of manuscript).
 
 
-```{r, message=FALSE, warning=FALSE}
+```{r}
 Wet_indeces_pond_T1 <- which(HMM_post_T1$state %in% c(2))
 T1_Wet_days <- c()
 T1_Wet_sds <- c()
@@ -348,14 +348,8 @@ T1_pond_summary$pond_sd <- c(sd(T1_Wet_sds), sd(T1_Wet2_sds), sd(T1_Dry_sds))
 T1_pond_summary$control_mean <- c(mean(T1_Wet_sds_control), mean(T1_Wet2_sds_control), mean(T1_Dry_sds_control))
 T1_pond_summary$control_sd <- c(sd(T1_Wet_sds_control), sd(T1_Wet2_sds_control), sd(T1_Dry_sds_control))
 
-gt_T1_tbl <- gt(data=T1_pond_summary) %>%
-  tab_header(
-    title = md("3-State HMM Summary"),
-    subtitle=md("Pond-Only T1")
-  )
-    
-
-gt_T1_tbl
+library(knitr)
+kable(T1_pond_summary, caption="Pond-Only T1")
 ```
 
 
@@ -468,14 +462,9 @@ T1_pond_differences_summary <- data.frame("state"=c("Wet", "Wet2","Dry"))
 T1_pond_differences_summary$mean <- c(mean(T1_Wet_sds_differences_delta), mean(T1_Wet2_sds_differences_delta), mean(T1_Dry_sds_differences_delta))
 T1_pond_differences_summary$sd <- c(sd(T1_Wet_sds_differences_delta), sd(T1_Wet2_sds_differences_delta), sd(T1_Dry_sds_differences_delta))
 
-gt_T1_differneces_tbl <- gt(data=T1_pond_differences_summary) %>%
-  tab_header(
-    title = md("3-State HMM Summary"),
-    subtitle= md("Paired Pond-Control T1")
-  )
-    
 
-gt_T1_differneces_tbl
+library(knitr)
+kable(T1_pond_differences_summary, caption="Paired Pond-Control T1")
 ```
 
 
