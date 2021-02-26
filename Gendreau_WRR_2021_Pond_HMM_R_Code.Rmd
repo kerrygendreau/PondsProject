@@ -2,7 +2,7 @@
 title: "Prediction of Pond Inundation States Using Hidden Markov Models"
 author: "Kerry L. Gendreau"
 date: "1/17/2021"
-output: html_document
+output: rmarkdown::github_document
 ---
 
 ```{r setup, include=FALSE}
